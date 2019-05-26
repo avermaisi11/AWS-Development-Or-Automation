@@ -19,7 +19,10 @@ def lambda_handler(event, context):
 	for region in regions:
 		print('Region: ',region)
 		ec2 = boto3.client('ec2', region_name = region)
-
+		"""
+		describe_snapshot will return all the snapshot both which are privare and public to you.
+		That's why we need to filter it by using the account id.
+		"""
 		response = ec2.describe_snapshots(OwnerIds=[account_id])
 		snapshots = response["Snapshots"]
 
