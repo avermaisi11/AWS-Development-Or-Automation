@@ -45,3 +45,7 @@ def lambda_handler(event, context):
 
     except Exception as e:
         print('Error - reason "%s"' % str(e))
+
+ """
+ Need to configure CloudWatch Event Rule, configure evnironment values for lambda.
+ """
