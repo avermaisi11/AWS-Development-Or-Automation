@@ -1,5 +1,5 @@
 # AWS-Development/Automation
-This repository contains my real time work which I has been done by me.
+This repository contains real time work which I has been done by me.
 
 Do not just blindly copy and use it for your own purpose.
 
