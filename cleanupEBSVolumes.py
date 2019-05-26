@@ -1,0 +1,21 @@
+"""
+Codes in this file will remove/delete the un-used EBS volumes from the AWS account.
+This is will help you to save lots of money.
+"""
+import boto3
+
+def lambda_handler(event, context):
+	ec2_client = boto3.client('ec2')
+	regions = [region['RegionName'] for region in ec2_client.describe_regions()['Regions']]
+
+	for region in regions:
+		ec2 = boto3.resource('ec2', region_name = region)
+		print('Region: ', region)
+
+		#Filtering unattached EBS volumes in a particualr region
+		volumes = ec2.volumes.filter( Filters=[{'Name':'status', 'Values':['available']}] )
+
+		for volume in volumes:
+			v = ec2.Volume(volume.id)
+			print('Deleting EBS volume: {}, Size: {} GiB'.format(v.id,v.size))
+			v.delete()
